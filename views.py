@@ -1,4 +1,6 @@
-from flask import Blueprint, request, jsonify
+from typing import Union
+
+from flask import Blueprint, request, jsonify, Response
 from marshmallow import ValidationError
 
 from builder import build_query
@@ -8,7 +10,7 @@ main_bp = Blueprint('main', __name__)
 
 
 @main_bp.route('/perform_query', methods=['POST'])
-def perform_query():
+def perform_query() -> Union[Response, tuple[Response, int]]:
     data = request.json
 
     try:
